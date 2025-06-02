@@ -38,8 +38,10 @@
                 </p>
             </div>
         </div>
-        <div class="absolute bottom-[-100px] -z-100 text-center w-full ">
-        </div>
+        {{-- <div class="absolute bottom-[-60px] -z-100 text-center w-full ">
+            <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.98/build/spline-viewer.js" async></script>
+<spline-viewer loading-anim-type="spinner-small-light" url="https://prod.spline.design/g9fY1TzK6xQEu6Hl/scene.splinecode"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAANCAYAAADISGwcAAAG1ElEQVR4AQCBAH7/ANnNhhDZzYYJ2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GBNnNhhzZzYYw2c2GQNnNhkfZzYZH2c2GPdnNhizZzYYW2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYAAIEAfv8A2c2GF9nNhhHZzYYG2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYT2c2GKtnNhkDZzYZP2c2GV9nNhlfZzYZN2c2GPNnNhibZzYYN2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GBtnNhgwAgQB+/wDZzYYe2c2GGNnNhg3ZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GDdnNhiXZzYY+2c2GVNnNhmXZzYZt2c2GbdnNhmTZzYZT2c2GPNnNhiPZzYYK2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgzZzYYX2c2GHQCBAH7/ANnNhhrZzYYV2c2GC9nNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgHZzYYY2c2GMtnNhkzZzYZj2c2GdNnNhn3ZzYZ92c2GdNnNhmLZzYZL2c2GMdnNhhfZzYYB2c2GANnNhgDZzYYA2c2GANnNhgDZzYYF2c2GEtnNhh3ZzYYjAIEAfv8A2c2GDNnNhgfZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhhjZzYY02c2GT9nNhmfZzYZ52c2GgtnNhoLZzYZ42c2GZtnNhk7ZzYYz2c2GGNnNhgHZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYK2c2GFNnNhhoAgQB+/wDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GFdnNhjLZzYZO2c2GZ9nNhnnZzYaD2c2GgtnNhnfZzYZk2c2GS9nNhi7ZzYYS2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYE2c2GCQCBAH7/ANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYa2c2GONnNhlXZzYZu2c2GgNnNhonZzYaI2c2GfNnNhmjZzYZN2c2GL9nNhhHZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYAAIEAfv8A2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GENnNhizZzYZL2c2GaNnNhoHZzYaT2c2GnNnNhpnZzYaN2c2Gd9nNhlvZzYY82c2GHNnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgAAgQB+/wDZzYYM2c2GCNnNhgLZzYYA2c2GANnNhgDZzYYA2c2GANnNhhHZzYYp2c2GRtnNhmTZzYaC2c2Gm9nNhq3ZzYa12c2GstnNhqXZzYaO2c2GcdnNhlDZzYYv2c2GEtnNhgDZzYYA2c2GANnNhgDZzYYA2c2GANnNhgDZzYYD2c2GCACBAH7/ANnNhhrZzYYX2c2GEdnNhgrZzYYF2c2GA9nNhgfZzYYS2c2GJdnNhj7ZzYZb2c2GetnNhpnZzYay2c2Gw9nNhsvZzYbI2c2GutnNhqPZzYaE2c2GY9nNhkHZzYYj2c2GCtnNhgDZzYYA2c2GANnNhgDZzYYA2c2GB9nNhg/ZzYYUAIEAfv8A2c2GHtnNhhvZzYYV2c2GD9nNhgrZzYYJ2c2GDtnNhhnZzYYs2c2GRtnNhmTZzYaE2c2GotnNhrzZzYbN2c2G1dnNhtLZzYbD2c2Gq9nNho3ZzYZr2c2GSNnNhinZzYYQ2c2GANnNhgDZzYYA2c2GANnNhgLZzYYM2c2GFNnNhhgAgQB+/wDZzYYX2c2GFNnNhg/ZzYYJ2c2GBNnNhgTZzYYJ2c2GFtnNhinZzYZD2c2GYtnNhoLZzYah2c2GutnNhszZzYbU2c2G0NnNhsHZzYaq2c2Gi9nNhmjZzYZG2c2GJ9nNhg7ZzYYA2c2GANnNhgDZzYYA2c2GANnNhgjZzYYQ2c2GFQGBAH7/ANnNhhDZzYYN2c2GCNnNhgLZzYYA2c2GANnNhgPZzYYQ2c2GI9nNhj7ZzYZc2c2GfdnNhpzZzYa12c2Gx9nNhs/ZzYbL2c2GvdnNhqXZzYaG2c2GZNnNhkHZzYYi2c2GCdnNhgDZzYYA2c2GANnNhgDZzYYA2c2GA9nNhgvZzYYQbAXNECoQN5UAAAAASUVORK5CYII=" alt="Spline preview" style="width: 100%; height: 100%;"/></spline-viewer>
+        </div> --}}
         {{-- Scroll Indikator --}}
         <div class="absolute bottom-0 sm:bottom-5 text-center w-full animate-bounce mb-8">
             <p
@@ -725,6 +727,7 @@
                 </div>
             </div>
         </div>
+        
     @endsection
 
     @push('styles')
