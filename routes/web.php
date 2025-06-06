@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PomoTimeController;
+use App\Http\Controllers\RankingController;
 
 Route::get('/', function () {
     return view('home');
@@ -16,4 +17,7 @@ Route::get('/pomotime', [App\Http\Controllers\PomoTimeController::class, 'index'
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/ranking', [RankingController::class, 'index'])->name('admin.ranking');
+    Route::get('/admin/ranking/create', [RankingController::class, 'create'])->name('admin.ranking.create');
+    Route::post('/admin/ranking/store', [RankingController::class, 'store'])->name('admin.ranking.store');
 });

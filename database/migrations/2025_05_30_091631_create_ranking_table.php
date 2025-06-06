@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ranking', function (Blueprint $table) {
+        Schema::create('rankings', function (Blueprint $table) {
             $table->id();
+            $table->string('full_name');
+            $table->integer('rank')->unique(); // posisi unik
+            $table->integer('hours');
+            $table->date('date_rank')->nullable(); // opsional
             $table->timestamps();
-            $table->integer('posisi')->unique();
-            $table->foreignId('hourtime')->constrained('users')->onDelete('cascade');
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ranking');
+        Schema::dropIfExists('rankings');
     }
 };
