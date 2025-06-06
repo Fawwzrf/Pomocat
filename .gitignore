@@ -12,8 +12,6 @@
 /.vscode
 /.zed
 /auth.json
-/public/build
-/public/hot
 /vendor
 Homestead.json
 Homestead.yaml

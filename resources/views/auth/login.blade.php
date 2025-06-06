@@ -143,7 +143,7 @@
     }
 </style>
 
-<div class="container">
+<div class="container ">
     <div class="main-box">
         <h1>Login</h1>
         <form method="POST" action="{{ route('login') }}">
