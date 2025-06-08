@@ -11,13 +11,15 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
     <div class="z-60 w-full" style="background: radial-gradient(circle, #F2A51A 0%, #EA6227 70%, #d35400 100%);">
         <div id="app">
-            <header class="w-full z-100 text-sm py-3 ">
-                <nav class="relative max-w-8xl w-full flex flex-wrap items-center justify-between mx-auto z-100 p-4 px-12">
+            <header class="w-full z-100 text-sm ">
+                <nav
+                    class="relative max-w-8xl w-full flex flex-wrap items-center justify-between mx-auto z-100 py-4 px-12">
                     {{-- Logo Anda --}}
                     <a href="{{ url('/') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
                         <img src="{{ asset('storage/images/logo.png') }}" class="h-16 w-auto" alt="Logo" />
@@ -53,87 +55,89 @@
                         @else
                             {{-- Dropdown Pengguna Menggunakan Struktur Flowbite --}}
                             {{-- Pastikan font Poppins sudah di-load melalui <head> atau tailwind.config.js --}}
-                                <div class="relative" style="font-family: 'Poppins', sans-serif;">
-                                    {{-- 1. Tombol Pemicu (Trigger) --}}
-                                    <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
-                                        class="flex items-center text-lg pe-2 font-medium text-yellow-100 rounded-full hover:text-white md:me-0 focus:ring-2 focus:ring-yellow-300"
-                                        type="button">
-                                        <span class="sr-only">Open user menu</span>
-                                
-                                        <img class="w-9 h-9 me-3 rounded-full"
-                                             src="{{ Auth::user()->profile_photo_url ?? asset('storage/images/profile_fawwaz.jpg') }}"
-                                             alt="user photo">
-                                
-                                        <span class="text-lg">{{ Auth::user()->name }}</span>
-                                
-                                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" viewBox="0 0 10 6">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="m1 1 4 4 4-4" />
-                                        </svg>
-                                    </button>
-                                
-                                    {{-- 2. Panel Dropdown --}}
-                                    <div id="dropdownAvatarName"
-                                        class="z-50 hidden bg-yellow-100 divide-y divide-yellow-200 rounded-lg shadow-lg w-56 border border-yellow-300">
-                                        
-                                        {{-- 3. Header Dropdown (Info Pengguna) --}}
-                                        <div class="px-4 py-3 text-sm text-indigo-900">
-                                            <div class="font-medium">{{ Auth::user()->name }}</div>
-                                            <div class="truncate text-slate-500">{{ Auth::user()->email }}</div>
-                                        </div>
-                                        
-                                        {{-- 4. Item Menu --}}
-                                        <ul class="py-2 text-sm text-indigo-900" aria-labelledby="dropdownAvatarNameButton">
-                                            <li>
-                                                <a href="#"
-                                                    class="flex items-center gap-x-2 px-4 py-2 hover:bg-yellow-200 transition-colors">
-                                                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                        width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                                                        <circle cx="12" cy="7" r="4" />
-                                                    </svg>
-                                                    Profile
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#"
-                                                    class="flex items-center gap-x-2 px-4 py-2 hover:bg-yellow-200 transition-colors">
-                                                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
-                                                        width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
-                                                        <circle cx="12" cy="12" r="3" />
-                                                    </svg>
-                                                    Settings
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        
-                                        {{-- 5. Link Logout --}}
-                                        <div class="py-1">
-                                            <a href="{{ route('logout') }}"
-                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                                class="flex items-center gap-x-2 px-4 py-2 text-sm text-red-700 hover:bg-red-100 hover:text-red-800 transition-colors">
+                            <div class="relative" style="font-family: 'Poppins', sans-serif;">
+                                {{-- 1. Tombol Pemicu (Trigger) --}}
+                                <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
+                                    class="flex items-center text-lg pe-2 font-medium text-yellow-100 rounded-full hover:text-white md:me-0 focus:ring-2 focus:ring-yellow-300"
+                                    type="button">
+                                    <span class="sr-only">Open user menu</span>
+
+                                    <img class="w-9 h-9 me-3 rounded-full"
+                                        src="{{ Auth::user()->profile_photo_url ?? asset('storage/images/profile_fawwaz.jpg') }}"
+                                        alt="user photo">
+
+                                    <span class="text-lg">{{ Auth::user()->name }}</span>
+
+                                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 10 6">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m1 1 4 4 4-4" />
+                                    </svg>
+                                </button>
+
+                                {{-- 2. Panel Dropdown --}}
+                                <div id="dropdownAvatarName"
+                                    class="z-50 hidden bg-yellow-100 divide-y divide-yellow-200 rounded-lg shadow-lg w-56 border border-yellow-300">
+
+                                    {{-- 3. Header Dropdown (Info Pengguna) --}}
+                                    <div class="px-4 py-3 text-sm text-indigo-900">
+                                        <div class="font-medium">{{ Auth::user()->name }}</div>
+                                        <div class="truncate text-slate-500">{{ Auth::user()->email }}</div>
+                                    </div>
+
+                                    {{-- 4. Item Menu --}}
+                                    <ul class="py-2 text-sm text-indigo-900" aria-labelledby="dropdownAvatarNameButton">
+                                        <li>
+                                            <a href="#"
+                                                class="flex items-center gap-x-2 px-4 py-2 hover:bg-yellow-200 transition-colors">
                                                 <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
                                                     width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round">
-                                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                                                    <polyline points="16,17 21,12 16,7" />
-                                                    <line x1="21" x2="9" y1="12" y2="12" />
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                                    <circle cx="12" cy="7" r="4" />
                                                 </svg>
-                                                {{ __('Logout') }}
+                                                Profile
                                             </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                                                @csrf
-                                            </form>
-                                        </div>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="flex items-center gap-x-2 px-4 py-2 hover:bg-yellow-200 transition-colors">
+                                                <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path
+                                                        d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                </svg>
+                                                Settings
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                    {{-- 5. Link Logout --}}
+                                    <div class="py-1">
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                            class="flex items-center gap-x-2 px-4 py-2 text-sm text-red-700 hover:bg-red-100 hover:text-red-800 transition-colors">
+                                            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                                <polyline points="16,17 21,12 16,7" />
+                                                <line x1="21" x2="9" y1="12" y2="12" />
+                                            </svg>
+                                            {{ __('Logout') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            class="hidden">
+                                            @csrf
+                                        </form>
                                     </div>
                                 </div>
+                            </div>
                         @endguest
 
                         {{-- Tombol Hamburger untuk Mobile (Menggunakan atribut Flowbite) --}}
@@ -182,12 +186,11 @@
                                 <a class="font-semibold text-stone-200 bg-amber-400 hover:bg-amber-500 py-2 px-4 rounded-lg inline-flex items-center gap-x-2"
                                     href="#">
                                     <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20" fill="currentColor">
+                                        fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
                                         <path
-                                            d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2h-5L9 4H4zm4.707 6.707a1 1 0 00-1.414-1.414L6 10.586V8a1 1 0 00-2 0v4a1 1 0 001 1h4a1 1 0 000-2H7.414l1.293-1.293z">
-                                        </path>
+                                            d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
                                     </svg>
-                                    Report
+                                    Guide
                                 </a>
                             </div>
                         </div>
@@ -317,9 +320,10 @@
                     </div>
             </footer>
         </div>
-        
+
         <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-        @stack('scripts') 
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.46.0/dist/apexcharts.min.js"></script>
+        @stack('scripts')
 </body>
 
 </html>

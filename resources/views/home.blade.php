@@ -4,7 +4,7 @@
     {{-- Container utama untuk konten ini, pastikan body atau parent-nya sudah memiliki background radial --}}
 
     <div
-        class="flex flex-col items-center justify-start min-h-[calc(100vh-theme(spacing.20))] text-yellow-100 -z-100 pt-10 sm:pt-12 md:pt-16 lg:pt-20 px-4 relative">
+        class="flex flex-col items-center justify-start min-h-[calc(100vh-theme(spacing.20))] text-yellow-100 -z-100 pt-0 px-4 relative">
 
         {{-- Teks Besar POMOCAT --}}
         <h1 class="text-6xl sm:text-8xl md:text-[120px] lg:text-[200px] xl:text-[290px] font-bold tracking-wider mt-5 mb-0 text-center"
@@ -16,7 +16,7 @@
         <div
             class="w-full max-w-[68rem] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-x-12 items-start mb-12 sm:mb-16 md:mb-20 lg:mb-24">
             {{-- Kolom Kiri --}}
-            <div class="text-center md:text-left">
+            <div class="text-left">
                 <p class="text-base sm:text-md lg:text-lg mb-4 sm:mb-6"
                     style="font-family: 'Poppins', cursive; letter-spacing: -0.03em;">
                     Klik tombol berikut untuk memulai PomoCat!
@@ -28,7 +28,7 @@
             </div>
 
             {{-- Kolom Kanan --}}
-            <div class="text-center md:text-right pr-0 md:pr-5 rounded-lg">
+            <div class="text-right pr-0 md:pr-5 rounded-lg">
                 <p
                     class="text-base sm:text-md lg:text-lg font-semibold mb-1 sm:mb-2"style="font-family: 'Poppins', cursive; letter-spacing: -0.03em;">
                     Hai, aku PomoCat!
@@ -53,7 +53,7 @@
         </div>
 
         {{-- Scroll Indikator --}}
-        <div class="absolute bottom-0 sm:bottom-5 text-center w-full animate-bounce mb-6 sm:mb-8">
+        <div class="absolute bottom-0 sm:bottom-5 text-center w-full animate-bounce ">
             <p
                 class="text-indigo-950 text-xs sm:text-sm md:text-base mb-0"style="font-family: 'Poppins', cursive; letter-spacing: -0.03em;">
                 Scroll untuk melihat lebih lanjut</p>
