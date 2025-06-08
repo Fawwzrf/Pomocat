@@ -62,4 +62,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(Task::class);
     }
+
+    public function getRankAttribute()
+    {
+        $rankedUsers = User::query()
+            ->withSum(['tasks' => fn($query) => $query->withTrashed()], 'sessions_completed')
+            ->get()
+            ->map(function ($user) {
+                $totalSessions = $user->tasks_sum_sessions_completed ?? 0;
+                $pomodoroDuration = $user->setting_pomodoro ?? 25;
+                $user->total_minutes = $totalSessions * $pomodoroDuration;
+                return $user;
+            })
+            ->sortByDesc('total_minutes')
+            ->pluck('id')
+            ->flip(); // Balik array, value jadi key, key jadi value
+
+        return ($rankedUsers[$this->id] ?? 0) + 1;
+    }
 }

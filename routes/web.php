@@ -6,6 +6,8 @@ use App\Http\Controllers\PomoTimeController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PageController;
 
 Route::get('/', function () {
     return view('home');
@@ -31,5 +33,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/report/details', [ReportController::class, 'details'])->name('report.details');
     Route::get('/report/export-csv', [ReportController::class, 'exportCsv'])->name('report.export-csv');
     Route::get('/report/ranking', [ReportController::class, 'ranking'])->name('report.ranking');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // =======================================================
+    // == RUTE BARU UNTUK PASSWORD & FOTO ==
+    Route::put('/password', [ProfileController::class, 'updatePassword'])->name('password.update');
+    Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo.update');
+    Route::get('/guide', [PageController::class, 'guide'])->name('guide');
+
+
     // =======================================================
 });
