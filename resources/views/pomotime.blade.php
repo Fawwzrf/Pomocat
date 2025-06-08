@@ -4,7 +4,8 @@
 
 @section('content')
     {{-- Kontainer utama halaman dengan background gradien --}}
-    <div class="min-h-screen flex justify-center items-start m-0">
+    <div id="pomotime-container" class="min-h-screen flex justify-center items-start m-0" data-settings="{{ json_encode($settings) }}">
+
 
         {{-- Kontainer untuk PomoTime dan Tasks, mengatur lebar dan posisi --}}
         <div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-7xl flex flex-col lg:flex-row lg:gap-x-20 px-4">
@@ -13,10 +14,10 @@
             <div class="w-full lg:w-[500px] shrink-0">
 
                 {{-- Bagian Timer --}}
-                @include('partials._timer')
+                @include('pomotime.partials._timer')
 
                 {{-- Bagian Tasks --}}
-                @include('partials._tasks')
+                @include('pomotime.partials._tasks')
 
                 
             </div>
@@ -37,9 +38,9 @@
     </div>
 
     
-    @include('partials._modal-add-task')
-    @include('partials._modal-settings')
-    @include('partials._modal-report')
+    @include('pomotime.partials._modal-add-task')
+    @include('pomotime.partials._modal-settings')
+    @include('pomotime.partials._modal-report')
 
     {{-- Elemen Audio untuk Notifikasi --}}
     <audio id="alarm-sound" src="{{ asset('sounds/notification.mp3') }}" preload="auto"></audio>

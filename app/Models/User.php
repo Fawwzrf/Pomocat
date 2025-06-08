@@ -23,6 +23,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_photo_path',
+        'setting_pomodoro',
+        'setting_short_break',
+        'setting_long_break',
+        'setting_long_break_interval',
+        'setting_auto_start_breaks',
+        'setting_auto_start_pomodoros',
+        'setting_auto_check_tasks',
+        'setting_auto_switch_tasks',
+        
     ];
 
     /**

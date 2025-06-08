@@ -1,23 +1,35 @@
-<?php
+<?php // File: routes/web.php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PomoTimeController;
-use App\Http\Controllers\RankingController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SettingsController;
 
 Route::get('/', function () {
     return view('home');
 });
-
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/pomotime', [App\Http\Controllers\PomoTimeController::class, 'index'])->name('pomotime');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+// Grup untuk semua rute yang memerlukan login
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/ranking', [RankingController::class, 'index'])->name('admin.ranking');
-    Route::get('/admin/ranking/create', [RankingController::class, 'create'])->name('admin.ranking.create');
-    Route::post('/admin/ranking/store', [RankingController::class, 'store'])->name('admin.ranking.store');
+    Route::get('/pomotime', [PomoTimeController::class, 'index'])->name('pomotime');
+
+    // Rute untuk server-side rendering (HTML Partials)
+    Route::get('/tasks/render', [TaskController::class, 'render'])->name('tasks.render');
+
+    // Rute untuk API (JSON Responses) - yang dipindahkan dari api.php
+    Route::apiResource('tasks', TaskController::class);
+    Route::put('/tasks/{task}/complete-session', [TaskController::class, 'completeSession']);
+    Route::delete('/tasks/clear/completed', [TaskController::class, 'clearCompleted'])->name('tasks.clear-completed');
+    Route::delete('/tasks/clear/all', [TaskController::class, 'clearAll'])->name('tasks.clear-all');
+    Route::get('/report/summary', [ReportController::class, 'summary'])->name('report.summary');
+    Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::get('/report/details', [ReportController::class, 'details'])->name('report.details');
+    Route::get('/report/export-csv', [ReportController::class, 'exportCsv'])->name('report.export-csv');
+    Route::get('/report/ranking', [ReportController::class, 'ranking'])->name('report.ranking');
+    // =======================================================
 });

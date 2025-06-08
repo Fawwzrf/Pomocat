@@ -11,19 +11,19 @@
                     <div>
                         <label for="setting-pomodoro"
                             class="block mb-1 text-sm font-medium text-gray-700">Pomodoro</label>
-                        <input type="number" id="setting-pomodoro" value="25"
+                        <input type="number" id="setting-pomodoro" value="25" min="1"
                             class="bg-white border border-yellow-400 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5">
                     </div>
                     <div>
                         <label for="setting-short-break" class="block mb-1 text-sm font-medium text-gray-700">Short
                             Break</label>
-                        <input type="number" id="setting-short-break" value="5"
+                        <input type="number" id="setting-short-break" value="5" min="1"
                             class="bg-white border border-yellow-400 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5">
                     </div>
                     <div>
                         <label for="setting-long-break" class="block mb-1 text-sm font-medium text-gray-700">Long
                             Break</label>
-                        <input type="number" id="setting-long-break" value="15"
+                        <input type="number" id="setting-long-break" value="15" min="1"
                             class="bg-white border border-yellow-400 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5">
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                 <div>
                     <label for="setting-long-break-interval"
                         class="block mb-1 text-sm font-medium text-indigo-900">Long Break Interval</label>
-                    <input type="number" id="setting-long-break-interval" value="4"
+                    <input type="number" id="setting-long-break-interval" value="4" min="1"
                         class="bg-white border border-yellow-400 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full p-2.5">
                 </div>
             </div>

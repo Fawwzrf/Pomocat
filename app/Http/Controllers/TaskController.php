@@ -1,4 +1,4 @@
-<?php
+<?php // File: app/Http/Controllers/TaskController.php
 
 namespace App\Http\Controllers;
 
@@ -8,102 +8,67 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    /**
-     * Menampilkan semua task milik user yang sedang login.
-     * Digunakan untuk mengisi daftar task saat halaman dimuat.
-     */
+    public function render()
+    {
+        $tasks = Auth::user()->tasks()->orderBy('completed', 'asc')->latest()->get();
+        // Kita tidak perlu lagi mengirim activeTaskId dari sini
+        return view('pomotime.partials._task-list', compact('tasks'));
+    }
+
     public function index()
     {
-        // Mengambil semua task milik user yang terotentikasi
-        // Diurutkan berdasarkan status 'completed' lalu tanggal dibuat
-        $tasks = Auth::user()->tasks()->orderBy('completed', 'asc')->latest()->get();
-
-        return response()->json($tasks);
+        return response()->json(Auth::user()->tasks()->orderBy('completed', 'asc')->latest()->get());
     }
-
-    /**
-     * Menyimpan task baru ke database.
-     * Dipanggil saat user mengirim form 'Add Task'.
-     */
-    public function store(Request $request)
+    public function show(Task $task)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'notes' => 'nullable|string',
-            'sessions_needed' => 'required|integer|min:1',
-        ]);
-
-        // Membuat task baru yang langsung terhubung dengan user yang sedang login
-        $task = $request->user()->tasks()->create([
-            'title' => $validated['title'],
-            'notes' => $validated['notes'],
-            'sessions_needed' => $validated['sessions_needed'],
-            // Field lain akan menggunakan nilai default dari migrasi
-        ]);
-
-        return response()->json($task, 201); // 201 = Created
-    }
-
-    /**
-     * Memperbarui task yang sudah ada.
-     * Digunakan untuk:
-     * - Menandai task selesai (checklist)
-     * - Menambah jumlah sesi selesai
-     * - (Nantinya) Mengedit detail task
-     */
-    public function update(Request $request, Task $task)
-    {
-        // Otorisasi: Pastikan user yang request adalah pemilik task
-        if ($request->user()->id !== $task->user_id) {
-            return response()->json(['message' => 'Unauthorized'], 403); // 403 = Forbidden
+        if ($task->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
         }
-
-        $validated = $request->validate([
-            'title' => 'sometimes|required|string|max:255',
-            'notes' => 'nullable|string',
-            'sessions_needed' => 'sometimes|required|integer|min:1',
-            'sessions_completed' => 'sometimes|required|integer|min:0',
-            'completed' => 'sometimes|required|boolean',
-        ]);
-
-        $task->update($validated);
-
         return response()->json($task);
     }
-
-    /**
-     * Menghapus task.
-     * Dipanggil saat user menekan tombol hapus pada sebuah task.
-     */
-    public function destroy(Request $request, Task $task)
+    public function store(Request $request)
     {
-        // Otorisasi: Pastikan user yang request adalah pemilik task
-        if ($request->user()->id !== $task->user_id) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
-
-        $task->delete();
-
-        return response()->json(null, 204); // 204 = No Content (sukses tanpa body balasan)
+        $validated = $request->validate(['title' => 'required|string|max:255', 'notes' => 'nullable|string', 'sessions_needed' => 'required|integer|min:1']);
+        $task = $request->user()->tasks()->create($validated);
+        return response()->json($task, 201);
     }
-
-    public function completeSession(Request $request, Task $task)
+    public function update(Request $request, Task $task)
     {
-        // Otorisasi: Pastikan user yang request adalah pemilik task
         if ($request->user()->id !== $task->user_id) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
-
-        // Tambah jumlah sesi yang selesai
+        $validated = $request->validate(['title' => 'sometimes|required|string|max:255', 'notes' => 'nullable|string', 'sessions_needed' => 'sometimes|required|integer|min:1', 'completed' => 'sometimes|required|boolean']);
+        $task->update($validated);
+        return response()->json($task);
+    }
+    public function destroy(Task $task)
+    {
+        if ($task->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+        $task->delete();
+        return response()->json(null, 204);
+    }
+    public function completeSession(Task $task)
+    {
+        if ($task->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
         $task->sessions_completed++;
-
-        // Jika sesi selesai sudah memenuhi yang dibutuhkan, tandai task sebagai completed
         if ($task->sessions_completed >= $task->sessions_needed) {
             $task->completed = true;
         }
-
         $task->save();
-
         return response()->json($task);
+    }
+    public function clearCompleted()
+    {
+        Auth::user()->tasks()->where('completed', true)->delete();
+        return response()->json(['message' => 'Tugas yang sudah selesai telah dihapus.']);
+    }
+    public function clearAll()
+    {
+        Auth::user()->tasks()->delete();
+        return response()->json(['message' => 'Semua tugas telah dihapus.']);
     }
 }

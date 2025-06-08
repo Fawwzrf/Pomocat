@@ -2,7 +2,7 @@
     {{-- Tombol Mode Timer --}}
     <div class="flex justify-center space-x-2 sm:space-x-3 mb-6">
         <button
-            class="pomotime-mode-btn active-mode text-sm sm:text-lg font-semibold py-1 px-3 rounded-full border-2 border-indigo-950 text-indigo-950 bg-yellow-100/70 hover:bg-yellow-100 transition-all">Pomodoro</button>
+            class="pomotime-mode-btn active-mode text-sm sm:text-lg font-semibold py-1 px-3 rounded-full border-2 border-indigo-950 text-indigo-950 hover:bg-yellow-100 transition-all">Pomodoro</button>
         <button
             class="pomotime-mode-btn text-sm sm:text-lg font-semibold py-1 px-3 rounded-full border-2 border-indigo-950 text-indigo-950 hover:bg-yellow-100 transition-all">Short
             Break</button>
