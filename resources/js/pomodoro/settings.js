@@ -1,6 +1,6 @@
 // File: resources/js/pomodoro/settings.js
 
-export function initSettings(elements, headers, initialSettings) {
+export function initSettings(elements, headers, initialSettings, isGuest) {
     const {
         settingsBtn, settingsModal, settingsForm, settingsCancelBtn,
         inputPomodoro, inputShortBreak, inputLongBreak, toggleAutoStartBreaks,
@@ -9,7 +9,10 @@ export function initSettings(elements, headers, initialSettings) {
     } = elements;
 
     const { jsonHeaders } = headers;
-    let settings = initialSettings;
+    let settings = isGuest
+        ? (JSON.parse(localStorage.getItem('settings')) || defaultSettings)
+        : initialSettings;
+
 
     function loadSettingsIntoModal() {
         inputPomodoro.value = settings.pomodoro;
@@ -37,28 +40,18 @@ export function initSettings(elements, headers, initialSettings) {
             autoSwitchTasks: toggleAutoSwitchTasks.checked,
         };
 
-        try {
-            const response = await fetch('/settings', {
-                method: 'PUT',
-                headers: jsonHeaders,
-                credentials: 'same-origin',
-                body: JSON.stringify(newSettings)
-            });
-
-            if (!response.ok) {
-                // Jika gagal, tampilkan error dan jangan refresh
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Gagal menyimpan pengaturan');
-            }
-
-            // =======================================================
-            // == PERUBAHAN UTAMA: LANGSUNG REFRESH HALAMAN ==
-            // =======================================================
-            location.reload();
-
-        } catch (error) {
-            console.error('Failed to save settings:', error);
-            alert('Gagal menyimpan pengaturan: ' + error.message);
+        if (isGuest) {
+            // STRATEGI TAMU: Simpan ke localStorage
+            localStorage.setItem('settings', JSON.stringify(newSettings));
+            settings = newSettings;
+            document.dispatchEvent(new CustomEvent('settingsUpdated', { detail: newSettings }));
+            closeSettingsModal();
+        } else {
+            // STRATEGI USER LOGIN: Simpan ke API
+            try {
+                await fetch('/settings', { method: 'PUT', headers: jsonHeaders, credentials: 'same-origin', body: JSON.stringify(newSettings) });
+                location.reload(); // Refresh untuk memuat ulang semua
+            } catch (error) { console.error('Gagal menyimpan pengaturan:', error); alert('Gagal menyimpan pengaturan.'); }
         }
     }
 
@@ -69,5 +62,5 @@ export function initSettings(elements, headers, initialSettings) {
         handleSaveSettings();
     });
 
-    return settings;
+    return { getSettings: () => settings };
 }

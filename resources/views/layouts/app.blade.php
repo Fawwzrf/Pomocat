@@ -38,11 +38,11 @@ data-spy="scroll" data-target="#guide-nav" data-offset="120">
                         @guest
                             <div class="border-l border-orange-400 h-6 mx-2"></div>
                             @if (Route::has('login'))
-                                <a class="font-medium text-yellow-100 hover:text-white" href="{{ route('login') }}">Log
+                                <a class="font-semibold text-yellow-100 hover:text-white" href="{{ route('login') }}">Log
                                     in</a>
                             @endif
                             @if (Route::has('register'))
-                                <a class="font-medium text-indigo-900 bg-yellow-400 hover:bg-yellow-500 py-2 px-4 rounded-lg"
+                                <a class="font-semibold text-yellow-100 bg-indigo-900 hover:bg-indigo-950 mx-2 py-2 px-4 rounded-lg"
                                     href="{{ route('register') }}">Sign up</a>
                             @endif
                         @else

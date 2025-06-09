@@ -1,158 +1,132 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('content')
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet">
-<style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap");
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        border: none;
-        outline: none;
-        text-decoration: none;
-        font-family: "Poppins", sans-serif;
-    }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Register - PomoCat</title>
 
-    body {
-        height: 100vh;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: url('/images/background.jpg');
-        background-size: cover;
-        background-position: center;
-    }
+    {{-- Aset dan Font --}}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    @vite(['resources/css/pomotime.css', 'resources/js/app.js'])
+</head>
 
-    .container {
-        position: relative;
-        width: 100%;
-        max-width: 400px;
-        height: auto;
-        background: transparent;
-        border-radius: 20px;
-        border: 3px solid rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(30px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        padding: 40px;
-    }
+<body class="font-sans antialiased">
 
-    .main-box {
-        width: 100%;
-    }
+    <section class="min-h-screen flex items-center justify-center p-4"
+        style="background: radial-gradient(circle, #F2A51A 0%, #EA6227 70%, #d35400 100%);">
+        {{-- Kontainer utama yang akan menampung dua kolom --}}
+        <div class="w-full max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-24">
 
-    .main-box h1 {
-        text-align: center;
-        font-size: 35px;
-        font-weight: 700;
-        color: #ffffff;
-        margin-bottom: 20px;
-    }
+                <div class="hidden md:flex items-center justify-center p-6">
+                    {{-- Ganti src dengan path ilustrasi Anda nanti --}}
+                    {{-- <img src="{{ asset('storage/images/register-illustration.png') }}" class="w-full h-auto max-w-sm" alt="Register Illustration"> --}}
+                    <p class="text-white/50 text-center">Area Ilustrasi</p>
+                </div>
+                {{-- KOLOM KIRI: FORM REGISTRASI --}}
+                <div class="w-full bg-yellow-100/80 backdrop-blur-sm rounded-2xl shadow-2xl sm:max-w-xl">
+                    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                        <a href="{{ url('/') }}"
+                            class="flex items-center mb-4 text-2xl font-semibold text-indigo-950">
+                            <img class="w-auto h-14" src="{{ asset('storage/images/logo.png') }}" alt="logo">
+                        </a>
+                        <div>
+                            <h1 class="text-xl font-bold leading-tight tracking-tight text-indigo-950 md:text-3xl">
+                                Create your account
+                            </h1>
+                            <p class="text-sm font-small text-gray-600 mt-2">
+                                Start your website in seconds. Already have an account? <a href="{{ route('login') }}"
+                                    class="font-medium text-indigo-800 hover:underline">Log in</a>
+                            </p>
+                        </div>
 
-    .input-box {
-        position: relative;
-        height: 55px;
-        width: 100%;
-        border-bottom: 2px solid #ffffff;
-        margin: 32px 0;
-    }
+                        <form class="space-y-4 md:space-y-6" method="POST" action="{{ route('register') }}">
+                            @csrf
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="name"
+                                        class="block mb-2 text-md font-medium text-indigo-900">Username</label>
+                                    <input type="text" name="name" id="name"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-md rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5"
+                                        placeholder="John Doe" value="{{ old('name') }}" required autofocus>
+                                    @error('name')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
 
-    .input-box label {
-        position: absolute;
-        top: 50%;
-        left: 6px;
-        transform: translateY(-50%);
-        pointer-events: none;
-        color: #ffffff;
-        font-weight: 500;
-        font-size: 17px;
-        transition: all ease 0.4s;
-    }
+                                <div>
+                                    <label for="email" class="block mb-2 text-md font-medium text-indigo-900">Your
+                                        Email</label>
+                                    <input type="email" name="email" id="email"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-md rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5"
+                                        placeholder="nama@email.com" value="{{ old('email') }}" required>
+                                    @error('email')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="password"
+                                        class="block mb-2 text-md font-medium text-indigo-900">Password</label>
+                                    <input type="password" name="password" id="password" placeholder="••••••••"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-md rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5"
+                                        required>
+                                </div>
+                                <div>
+                                    <label for="password-confirm"
+                                        class="block mb-2 text-md font-medium text-indigo-900">Confirm Password</label>
+                                    <input type="password" name="password_confirmation" id="password-confirm"
+                                        placeholder="••••••••"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-md rounded-lg focus:ring-amber-600 focus:border-amber-600 block w-full p-2.5"
+                                        required>
+                                </div>
+                            </div>
+                            @error('password')
+                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            @enderror
 
-    .input-box input {
-        height: 100%;
-        width: 100%;
-        background-color: transparent;
-        font-size: 15px;
-        font-weight: 600;
-        color: #ffffff;
-        padding: 0 30px 0 6px;
-    }
+                            <button type="submit"
+                                class="w-full text-white bg-indigo-800 hover:bg-indigo-900 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-base px-5 py-2.5 text-center transition-colors">
+                                Create an account
+                            </button>
 
-    .input-box input:focus ~ label,
-    .input-box input:valid ~ label {
-        top: -3px;
-    }
+                            <div class="inline-flex items-center justify-center w-full">
+                                <hr class="w-full h-px my-2 bg-gray-300 border-0">
+                                <span
+                                    class="absolute px-3 font-medium text-gray-500 -translate-x-1/2 bg-yellow-100/0 left-1/2">or</span>
+                            </div>
 
-    .btn {
-        width: 100%;
-        height: 45px;
-        background-color: #ffffff;
-        border-radius: 30px;
-        font-size: 15px;
-        font-weight: 600;
-        color: #020202;
-        margin-top: 10px;
-        cursor: pointer;
-    }
+                            <div>
+                                <button type="button"
+                                    class="w-full text-indigo-900 bg-white hover:bg-gray-100 border border-gray-300 focus:ring-4 focus:outline-none focus:ring-gray-200 font-medium rounded-lg text-base px-5 py-2.5 text-center inline-flex items-center justify-center">
+                                    <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 18 19">
+                                        <path fill-rule="evenodd"
+                                            d="M8.842 18.083a8.8 8.8 0 0 1-8.65-8.948 8.841 8.841 0 0 1 8.8-8.652h.153a8.464 8.464 0 0 1 5.7 2.257l-2.193 2.038A5.27 5.27 0 0 0 9.09 3.4a5.882 5.882 0 0 0-.2 11.76h.124a5.091 5.091 0 0 0 5.248-4.057L14.3 11H9V8h8.34c.066.543.095 1.09.088 1.636-.086 5.053-3.463 8.449-8.4 8.449l-.186-.002Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    Sign up with Google
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
-    .login-link {
-        text-align: center;
-        color: #ffffff;
-        font-size: 15px;
-        font-weight: 500;
-        margin-top: 25px;
-    }
+                {{-- KOLOM KANAN: ILUSTRASI --}}
 
-    .login-link a {
-        font-weight: 600;
-        color: #ffffff;
-        text-decoration: none;
-    }
-
-    .login-link a:hover {
-        text-decoration: underline;
-    }
-</style>
-
-<div class="container">
-    <div class="main-box">
-        <h1>Register</h1>
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <div class="input-box">
-                <input id="name" type="text" name="name" required value="{{ old('name') }}">
-                <label for="name">Name</label>
             </div>
+        </div>
+    </section>
 
-            <div class="input-box">
-                <input id="email" type="email" name="email" required value="{{ old('email') }}">
-                <label for="email">Email</label>
-            </div>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+</body>
 
-            <div class="input-box">
-                <input id="password" type="password" name="password" required>
-                <label for="password">Password</label>
-            </div>
-
-            <div class="input-box">
-                <input id="password-confirm" type="password" name="password_confirmation" required>
-                <label for="password-confirm">Confirm Password</label>
-            </div>
-
-            <button type="submit" class="btn">Register</button>
-
-            <div class="login-link">
-                <p>Already have an account?
-                    <a href="{{ route('login') }}">Login</a>
-                </p>
-            </div>
-        </form>
-    </div>
-</div>
-@endsection
+</html>

@@ -1,4 +1,4 @@
-// File: resources/js/pomotime.js (File Utama Baru)
+// File: resources/js/pomotime.js
 
 import { initSettings } from './pomodoro/settings.js';
 import { initTasks } from './pomodoro/tasks.js';
@@ -6,7 +6,6 @@ import { initTimer } from './pomodoro/timer.js';
 import { initReport } from './pomodoro/report.js';
 
 if (document.getElementById('pomotime-container')) {
-
     document.addEventListener('DOMContentLoaded', function () {
         const elements = {
             timeDisplay: document.getElementById('time-display'),
@@ -42,17 +41,35 @@ if (document.getElementById('pomotime-container')) {
             reportBtn: document.querySelector('[data-modal-target="report-modal"]'),
         };
 
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
         const headers = { baseHeaders: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-TOKEN': csrfToken }, jsonHeaders: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest', 'X-CSRF-TOKEN': csrfToken, 'Content-Type': 'application/json' } };
 
         const pomotimeContainer = document.getElementById('pomotime-container');
-        const initialSettings = JSON.parse(pomotimeContainer.dataset.settings);
+        const isGuest = pomotimeContainer.dataset.isGuest === 'true';
 
-        // --- PERUBAHAN DI SINI ---
-        const settingsModule = initSettings(elements, headers, initialSettings);
-        // Berikan initialSettings ke initTasks
-        const taskModule = initTasks(elements, headers, initialSettings);
-        const timerModule = initTimer(elements, initialSettings, taskModule.handleCompleteSession);
-        initReport(elements, headers);
+        // =======================================================
+        // == PERBAIKAN DI SINI ==
+        // =======================================================
+
+        // 1. Definisikan pengaturan default di satu tempat
+        const defaultSettings = {
+            pomodoro: 25, shortBreak: 5, longBreak: 15,
+            autoStartBreaks: true, autoStartPomodoros: false,
+            longBreakInterval: 4, autoCheckTasks: true, autoSwitchTasks: true
+        };
+
+        // 2. Ambil pengaturan dari server (jika ada) atau gunakan objek kosong
+        const settingsFromServer = JSON.parse(pomotimeContainer.dataset.settings || '{}');
+
+        // 3. Gabungkan pengaturan default dengan pengaturan dari server.
+        // Jika dari server ada, ia akan menimpa default. Jika tidak, default akan digunakan.
+        const initialSettings = { ...defaultSettings, ...settingsFromServer };
+
+        // =======================================================
+
+        const settingsModule = initSettings(elements, headers, initialSettings, isGuest);
+        const taskModule = initTasks(elements, headers, isGuest);
+        initTimer(elements, settingsModule.getSettings(), taskModule.handleCompleteSession);
+        initReport(elements, headers, isGuest);
     });
 }

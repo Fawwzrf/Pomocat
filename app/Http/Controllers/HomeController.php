@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Pastikan hanya user yang terotentikasi yang bisa mengakses controller ini.
      */
     public function __construct()
     {
@@ -17,12 +15,11 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * Menampilkan halaman "home" aplikasi.
      */
     public function index()
     {
+        // Cukup tampilkan view 'home'
         return view('home');
     }
 }

@@ -30,7 +30,7 @@
                     <div class="space-y-12 text-yellow-100/90 leading-relaxed">
 
                         <section id="apa-itu-pomodoro" class="scroll-mt-24">
-                            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-6">😹 Selamat Datang di Pomo Cat!</h1>
+                            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-6">😹 Selamat Datang di PomoCat !</h1>
                             <p class="text-lg mb-4">Pernah merasa sulit untuk memulai pekerjaan? Atau mungkin perhatian Anda gampang teralihkan oleh notifikasi dan media sosial? Jangan khawatir, Anda tidak sendirian.</p>
                             <p class="text-lg mb-6">Pomo Cat hadir untuk membantu Anda mengatasi masalah tersebut dengan sebuah metode sederhana namun sangat kuat: <strong class="text-white font-semibold">Teknik Pomodoro</strong>.</p>
                             <blockquote class="border-l-4 border-amber-400 pl-6 italic text-yellow-100 my-6">Filosofi Inti: Bekerja dalam sprint pendek dan terfokus jauh lebih efektif daripada bekerja berjam-jam tanpa henti. Istirahat yang terencana bukanlah kemalasan, melainkan bagian penting dari produktivitas.</blockquote>

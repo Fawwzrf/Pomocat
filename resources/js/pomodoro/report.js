@@ -2,14 +2,26 @@
 
 // File: resources/js/pomodoro/report.js
 
-export function initReport(elements, headers) {
+export function initReport(elements, headers, isGuest) {
     const { reportBtn } = elements;
     const { baseHeaders } = headers;
+    const reportBtnGuest = document.getElementById('report-btn-guest');
+
     let charts = {};
     let currentRange = 'week';
     let detailTabInitialized = false;
     let rankingTabInitialized = false;
     let debounceTimer;
+
+    if (isGuest) {
+        if (reportBtnGuest) {
+            reportBtnGuest.addEventListener('click', () => {
+                alert('Silakan login atau daftar untuk mengakses fitur laporan dan peringkat.');
+            });
+        }
+        return; // Hentikan eksekusi untuk tamu
+    }
+
 
     // --- Inisialisasi Komponen Flowbite ---
     const tabsWrapper = document.getElementById('report-tabs-wrapper');
