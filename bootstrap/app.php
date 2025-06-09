@@ -22,6 +22,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // == TAMBAHKAN BARIS INI ==
         // ===============================================
         $middleware->statefulApi();
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\IsAdmin::class,
+        ]);
         // ===============================================
 
     })

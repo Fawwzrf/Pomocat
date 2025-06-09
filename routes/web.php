@@ -8,6 +8,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\TaskController as AdminTaskController;
+use App\Http\Controllers\Admin\SummaryController;
+use App\Http\Controllers\Admin\RankingController as AdminRankingController;
 
 // RUTE PUBLIK (Bisa diakses tanpa login)
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -35,4 +40,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/report/export-csv', [ReportController::class, 'exportCsv'])->name('report.export-csv');
     Route::get('/report/ranking', [ReportController::class, 'ranking'])->name('report.ranking');
     Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');
+});
+
+// routes/web.php
+
+// ... (route-route Anda yang lain)
+
+// RUTE KHUSUS ADMIN PANEL
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('users', UserController::class);
+    Route::resource('tasks', AdminTaskController::class);
+    Route::get('/summary', [SummaryController::class, 'index'])->name('summary.index');
+    Route::get('/ranking', [AdminRankingController::class, 'index'])->name('ranking.index');
 });
