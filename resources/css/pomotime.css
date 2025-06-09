@@ -1,0 +1,38 @@
+/* File: resources/css/pomotime.css */
+
+.pomotime-mode-btn.active-mode {
+    background-color: rgba(252, 247, 187, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #1e293b;
+    /* slate-800 */
+}
+
+.task-item .delete-task-btn {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.task-item:hover .delete-task-btn {
+    opacity: 1;
+}
+
+.progress-shadow {
+    filter:
+        
+        drop-shadow(0 0 1px currentColor);
+    /* Kilau/Glow */
+}
+
+.task-item.task-active {
+    box-shadow: 0 0 0 2px #facc15;
+    /* Kuning (yellow-400) */
+    background-color: #fef3c7;
+    /* yellow-100 */
+}
+
+.task-item.task-active span {
+    color: #1e293b;
+    /* slate-800 */
+}
