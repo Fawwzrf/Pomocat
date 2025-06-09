@@ -11,7 +11,7 @@ class TaskController extends Controller
     public function render()
     {
         $tasks = Auth::user()->tasks()->orderBy('completed', 'asc')->latest()->get();
-        // Kita tidak perlu lagi mengirim activeTaskId dari sini
+        // Cukup kembalikan view dengan data tasks
         return view('pomotime.partials._task-list', compact('tasks'));
     }
 

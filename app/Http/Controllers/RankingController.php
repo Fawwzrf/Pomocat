@@ -25,7 +25,7 @@ class RankingController extends Controller
             ['name' => 'Melvin Boyle', 'rank' => 9, 'hours' => 51, 'date' => '13/2/2025'],
             ['name' => 'Kailee Thomas', 'rank' => 10, 'hours' => 45, 'date' => '13/2/2025'],
         ];
-
+        
         // Urutkan ulang berdasarkan rank
         usort($rankingData, fn($a, $b) => $a['rank'] <=> $b['rank']);
 

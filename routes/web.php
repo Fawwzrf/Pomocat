@@ -26,7 +26,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Rute untuk rendering HTML & API yang butuh data user
     Route::get('/tasks/render', [TaskController::class, 'render'])->name('tasks.render');
-    Route::post('/tasks/{task}/set-active', [TaskController::class, 'setActive'])->name('tasks.set-active');
     Route::apiResource('tasks', TaskController::class);
     Route::put('/tasks/{task}/complete-session', [TaskController::class, 'completeSession']);
     Route::delete('/tasks/clear/completed', [TaskController::class, 'clearCompleted'])->name('tasks.clear-completed');
