@@ -23,6 +23,8 @@
     "dependencies": {
         "@floating-ui/dom": "^1.7.0",
         "@preline/dropdown": "^3.0.1",
+        "@splinetool/loader": "^1.10.2",
+        "@splinetool/runtime": "^1.10.2",
         "flowbite": "^3.1.2",
         "preline": "^3.0.1",
         "react": "^19.1.0",

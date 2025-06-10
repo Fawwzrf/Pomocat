@@ -4,6 +4,7 @@ import { initSettings } from './pomodoro/settings.js';
 import { initTasks } from './pomodoro/tasks.js';
 import { initTimer } from './pomodoro/timer.js';
 import { initReport } from './pomodoro/report.js';
+import { initPomoSpline } from './pomodoro/spline-pomo.js';
 
 if (document.getElementById('pomotime-container')) {
     document.addEventListener('DOMContentLoaded', function () {
@@ -71,5 +72,6 @@ if (document.getElementById('pomotime-container')) {
         const taskModule = initTasks(elements, headers, isGuest);
         initTimer(elements, settingsModule.getSettings(), taskModule.handleCompleteSession);
         initReport(elements, headers, isGuest);
+        initPomoSpline();
     });
 }
