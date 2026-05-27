@@ -1,5 +1,3 @@
-// File: resources/js/pomotime.js
-
 import { initSettings } from './pomodoro/settings.js';
 import { initTasks } from './pomodoro/tasks.js';
 import { initTimer } from './pomodoro/timer.js';
@@ -17,7 +15,6 @@ if (document.getElementById('pomotime-container')) {
             startPauseBtn: document.getElementById('start-pause-btn'),
             resetBtn: document.getElementById('reset-btn'),
             settingsBtn: document.getElementById('settings-btn'),
-            alarmSound: document.getElementById('alarm-sound'),
             taskListContainer: document.getElementById('task-list'),
             addTaskBtn: document.getElementById('add-task-btn'),
             clearFinishedTasksBtn: document.getElementById('clear-finished-tasks-btn'),
@@ -48,29 +45,16 @@ if (document.getElementById('pomotime-container')) {
         const pomotimeContainer = document.getElementById('pomotime-container');
         const isGuest = pomotimeContainer.dataset.isGuest === 'true';
 
-        // =======================================================
-        // == PERBAIKAN DI SINI ==
-        // =======================================================
-
-        // 1. Definisikan pengaturan default di satu tempat
-        const defaultSettings = {
-            pomodoro: 25, shortBreak: 5, longBreak: 15,
-            autoStartBreaks: true, autoStartPomodoros: false,
-            longBreakInterval: 4, autoCheckTasks: true, autoSwitchTasks: true
-        };
-
-        // 2. Ambil pengaturan dari server (jika ada) atau gunakan objek kosong
+        const defaultSettings = { pomodoro: 25, shortBreak: 5, longBreak: 15, autoStartBreaks: true, autoStartPomodoros: false, longBreakInterval: 4, autoCheckTasks: true, autoSwitchTasks: true };
         const settingsFromServer = JSON.parse(pomotimeContainer.dataset.settings || '{}');
-
-        // 3. Gabungkan pengaturan default dengan pengaturan dari server.
-        // Jika dari server ada, ia akan menimpa default. Jika tidak, default akan digunakan.
         const initialSettings = { ...defaultSettings, ...settingsFromServer };
 
-        // =======================================================
-
         const settingsModule = initSettings(elements, headers, initialSettings, isGuest);
-        const taskModule = initTasks(elements, headers, isGuest);
-        initTimer(elements, settingsModule.getSettings(), taskModule.handleCompleteSession);
+        const taskModule = initTasks(elements, headers, initialSettings, isGuest);
+
+        // PERBAIKAN: Berikan objek initialSettings secara langsung ke initTimer
+        initTimer(elements, initialSettings, taskModule.handleCompleteSession);
+
         initReport(elements, headers, isGuest);
         initPomoSpline();
     });

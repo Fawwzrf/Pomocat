@@ -1,0 +1,16 @@
+{
+  "resources/css/pomotime.css": {
+    "file": "assets/pomotime-CYzpiy1J.css",
+    "src": "resources/css/pomotime.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-NM_26Ebf.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/pomotime-CYzpiy1J.css"
+    ]
+  }
+}
