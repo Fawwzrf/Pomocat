@@ -22,7 +22,7 @@ Pomocat adalah aplikasi web manajemen waktu berbasis metode Pomodoro yang mengin
 
 ## Cara Instalasi & Menjalankan Proyek
 
-1. **Clone repositori**:
+1. **Clone repositori ini**:
    ```bash
    git clone https://github.com/Fawwzrf/pomocat.git
    cd pomocat
